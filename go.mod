@@ -1,3 +1,3 @@
-module github.com/rsned/go/stats
+module github.com/rsned/stats
 
 go 1.24
