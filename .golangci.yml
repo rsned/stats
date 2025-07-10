@@ -1,0 +1,69 @@
+version: "2"
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+linters:
+  enable:
+    - asciicheck
+    - dupword
+    - errcheck     
+    - errorlint
+    - exhaustive
+    - exhaustruct 
+    - forcetypeassert 
+    - goconst
+    - gocritic
+    - inamedparam
+    - makezero  
+    - misspell 
+    - nlreturn 
+    - nonamedreturns 
+    - predeclared  
+    - revive  
+    - thelper
+    - unconvert
+    - wastedassign  
+    - whitespace  
+
+  disable:
+    # A number of these checks run by default so they are explicitly
+    # disabled here. 
+    
+    # TODO(rsned): This should be enabled once we define the appropriate
+    # list of acceptable external imports.  (e.g. should only be trusted
+    # verifiable sources)
+    - depguard  
+
+    # There are too many package globals constants and types.
+    # (lookup tables and such)
+    - gochecknoglobals
+
+    # gosec detects a bunch of unsafe integer conversions. Anywhere we
+    # need to cast the big.Float precision bits to an int.
+    # Should run manually from time to time to see if anything other 
+    # than that gets caught.
+    - gosec
+
+    # "Magic numbers" conflicts with pretty much every constant and series
+    # generation in math work.  There are tons of constants (Bernoulli, 
+    # Taylor series, e, pi, etc. etc. So leave this check disabled.
+    # TODO(rsned): Enable manually once in a while to look for any
+    # actually fixable cases.
+    - mnd 
+
+    # Triggers on most tests for failing to call paralleltest.
+    # There is no need to use this so keep it disabled.
+    - paralleltest 
+    
+    # This triggers on every _test file saying they should be separate
+    # parallel packages.
+    - testpackage 
+
+    # This triggers on many parts written in advance of the code that
+    # actually calls them.  It may occasionally find some real unused
+    # code so running it by hand once in while could be useful.
+    - unused      
+formatters:
+  enable:
+    - gofmt
+    - goimports
