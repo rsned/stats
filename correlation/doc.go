@@ -34,20 +34,9 @@ For example:
 
 To use with big.Floats:
 
-	x:= []*big.Float{
-		big.NewFloat(1e30),
-		big.NewFloat(2e74),
-		big.NewFloat(3e150),
-		big.NewFloat(4e311),
-		big.NewFloat(5e500),
-	}
-	y:= []*big.Float{
-		big.NewFloat(2e30),
-		big.NewFloat(4e75),
-		big.NewFloat(6e150),
-		big.NewFloat(8e310),
-		big.NewFloat(10e502),
-	}
-	result, err := CorrelateBig(x, y, correlate.Pearson)
+	x := stringsToBigFloat([]string{"1e1000", "2e1000", "3e1000", "4e1000", "5e1000"})
+	y := stringsToBigFloat([]string{"3e1000", "6e1000", "7e1000", "3e1000", "9e1000"})
+
+	result, err := CorrelateBig(x, y, correlate.Pearson)  // result will be ~0.545705
 */
 package correlation
